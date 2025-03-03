@@ -1,0 +1,32 @@
+.card {
+    padding: 20px; 
+    margin: 20px;
+}
+
+.invalid { 
+    border: 2px solid red
+}
+
+.valid { 
+    border: 2px solid green
+}
+
+.country-name {
+    color:rgb(0, 153, 255)
+}
+
+.btn-primary { 
+    background-color: rgb(0, 153, 255) !important;
+}
+
+.border-primary {
+    border: 1px solid rgb(0, 153, 255);
+}
+
+.error-heading {
+    color: rgb(255, 130, 130);
+}
+
+.border-error {
+    border: 1px solid rgb(255, 130, 130);
+}

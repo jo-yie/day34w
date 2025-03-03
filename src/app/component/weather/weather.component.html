@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="card border-primary">
+
+        <div class="row mb-3">
+            <h1 class="country-name">What's the Weather Like in...</h1>
+        </div>
+
+        <form 
+            [formGroup]="form"
+            (submit)="processForm()">
+
+            <div class="row mb-3">
+                <label for="city"
+                    class="col-sm-2 col-form-label">
+                    City:
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" 
+                        class="form-control"
+                        id="city"
+                        formControlName="city"
+                        [ngClass]="{
+                            'is-valid': isCtrlValid('city'),
+                            'is-invalid': isCtrlInvalid('city')
+                        }">
+
+                    <div *ngIf="isCtrlInvalid('city')" class="invalid-feedback">
+                        <div *ngIf="cityCtrl?.errors?.['required']">City is required</div>
+                        <!-- <div *ngIf="cityCtrl?.errors?.['minlength']">City must be at least 5 characters</div> -->
+                    </div>
+
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary" type="submit"
+                        [disabled]="form.invalid">
+                        Get
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="card border-primary" *ngIf="fromApi">
+        <h1 class="country-name">{{ fromApi.name }}</h1>
+        <br />
+        <div class="row mb-3">
+            <div class="col-sm-4">
+                Temperature:
+            </div>
+            <div class="col-sm-8">
+                <strong>{{ fromApi.main.temp }}ºC</strong>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-sm-4">
+                Feels Like:
+            </div>
+            <div class="col-sm-8">
+                <strong>{{ fromApi.main.feels_like }}ºC</strong>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-sm-4">
+                Weather:
+            </div>
+            <div class="col-sm-8">
+                <div *ngFor="let item of fromApi.weather">
+                    <strong>{{ item.main }} ({{ item.description }})</strong>
+                    <br />
+                    <img [src]="'https://openweathermap.org/img/wn/' + item.icon + '@2x.png'">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card border-error" *ngIf="!fromApi && errorMessage">
+        <h1 class="error-heading">Error</h1>
+        <p>{{ errorMessage.message }}</p>
+    </div>
+
+</div>

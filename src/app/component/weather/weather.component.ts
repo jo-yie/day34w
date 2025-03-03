@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormInput } from '../../models';
+import { FormInput } from '../../model/models';
+import { WeatherAPIService } from '../../service/weather-api.service';
 
 @Component({
   selector: 'app-weather',
@@ -13,6 +14,10 @@ export class WeatherComponent {
   fb = inject(FormBuilder)
   form!: FormGroup
 
+  constructor(private weatherAPIService: WeatherAPIService) {}
+  fromApi: any
+  errorMessage: any
+
   ngOnInit(): void {
 
     this.form =  this.createForm()
@@ -22,7 +27,7 @@ export class WeatherComponent {
   createForm(): FormGroup {
 
     return this.fb.group({
-      city: this.fb.control<string>("", [ Validators.required, Validators.minLength(5) ])
+      city: this.fb.control<string>("", [ Validators.required ])
     })
 
   }
@@ -32,6 +37,21 @@ export class WeatherComponent {
     // const values = this.form.value
     const values: FormInput = this.form.value
     console.log(">>>Values: ", values)
+
+    const cityName = this.form.value.city
+
+    this.weatherAPIService.getAPI(cityName).subscribe({
+      next: (data) => { 
+        this.fromApi = data, 
+        this.errorMessage = ""
+      }, 
+      error: (err) => {
+      // error: (err) => console.error(err)
+        this.errorMessage = err,
+        this.fromApi = null
+      }
+
+    })
 
   }
 
