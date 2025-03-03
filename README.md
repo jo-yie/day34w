@@ -8,7 +8,8 @@
 
 
 - Basic Styling with Bootstrap 
-- Calling an (External Weather API)[https://openweathermap.org/current] Using HttpClient Based on User Input
+- Calling an [External Weather API](https://openweathermap.org/current) Using HttpClient Based on User Input
 
 Todo: 
 - More graceful error handling when API call doesn't recognise a city name
+- Hide API key with environment variables
