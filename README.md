@@ -3,6 +3,10 @@
 
 ### Weather API Using Angular's HttpClient
 
+
+<img width="1728" alt="Screenshot 2025-03-04 at 1 58 57 AM" src="https://github.com/user-attachments/assets/df27c410-d9a8-468f-b55a-91ac9a2e4a7c" />
+
+
 - Basic Styling with Bootstrap 
 - Calling an (External Weather API)[https://openweathermap.org/current] Using HttpClient Based on User Input
 
